@@ -4,7 +4,7 @@ export const getCurrencyConversor = async (entrada, saida) => {
     console.log('entrada',entrada)
     console.log('saida',saida)
         // let url = `https://www.floatrates.com/daily/${(this.state.moedaB)}.json`
-        let url = `https://www.floatrates.com/daily/brl.json`
+        let url = `https://www.floatrates.com/daily/${saida}.json`
         // console.log(this.state.value)
         // console.log(this.props.moedaA)
         // console.log(this.props.moedaB)
@@ -18,9 +18,12 @@ export const getCurrencyConversor = async (entrada, saida) => {
               })
         .then(json=>{
         //    let cotacao = json[(this.state.moedaA)].inverseRate;
-           let cotacao = json['usd'].inverseRate;
+           console.log('json')
+           console.log(json.data[entrada])
+           let cotacao = json.data[entrada].inverseRate;
            console.log('cotacao')
            console.log(cotacao)
+           return cotacao
         //    let moedaB_valor = ( parseFloat(this.state.moedaA_valor) * cotacao).toFixed(2);
         //    this.setState({moedaB_valor});
         })

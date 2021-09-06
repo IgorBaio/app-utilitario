@@ -3,16 +3,15 @@ import {
   LOGIN,
   PAGE,
   SET_INITIALS_STATE,
-  SET_PHOTOS_DATA,
-  SET_PHOTOS_DATA_SUCCESS
+  GET_CURRENCY_CONVERTED,
+  GET_CURRENCY_CONVERTED_SUCCESS
 } from "../actions/types";
 
 const initialState = {
-  itens: [],
-  page: 0,
-  user: {},
-  produtos: [],
   loading: false,
+  baseCurrency:null,
+  targetCurrency:null,
+  convertedValue: null,
 };
 
 const saveReducer = (state = initialState, action) => {
@@ -29,8 +28,11 @@ const saveReducer = (state = initialState, action) => {
     case SET_INITIALS_STATE:
       state = initialState;
       return state;
-    case SET_PHOTOS_DATA:
-      state.produtos = action.payload
+    case GET_CURRENCY_CONVERTED:
+      console.log('action')
+      console.log(action)
+      state.baseCurrency = action.payload.baseCurrency
+      state.targetCurrency = action.payload.targetCurrency
 
       return state;
     /*
@@ -39,8 +41,8 @@ const saveReducer = (state = initialState, action) => {
                 loading: true
             }
             */
-    case SET_PHOTOS_DATA_SUCCESS:
-      state.produtos = action.produtos;
+    case GET_CURRENCY_CONVERTED_SUCCESS:
+      state.convertedValue = action.convertedValue;
       // state.produtos = action.payload
 
       return state;

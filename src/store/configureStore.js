@@ -1,8 +1,8 @@
 import { createStore, combineReducers } from "redux";
-import saveReducer from './reducer/saveReducer'
+import currencyConversorReducer from './reducer/currencyConversorReducer'
 
 const rootReducer = combineReducers({
-    save: saveReducer
+    currencyConversor: currencyConversorReducer
 })
 
 const configureSaveReducer = () => createStore(rootReducer);

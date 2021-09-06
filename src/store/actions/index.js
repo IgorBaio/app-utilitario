@@ -1,6 +1,6 @@
-import { setProducts, setProductsSuccess } from "./products";
+import { getCurrencyConverted, getCurrencyConvertedSuccess } from "./currencyConversor";
 
 export {
-    setProducts,
-    setProductsSuccess
+    getCurrencyConverted,
+    getCurrencyConvertedSuccess
 }

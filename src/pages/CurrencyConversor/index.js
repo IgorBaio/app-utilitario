@@ -11,16 +11,30 @@ import currencies from "./dataCurrencies/currencies";
 import { getCurrencyConversor } from "../../../service/currencyService";
 import BottomModal from "../../components/BottomModal";
 import RadioButton from "../../components/RadioButton";
+import { Button } from "react-native-paper";
+import { useDispatch } from "react-redux";
+import { getCurrencyConverted } from "../../store/actions";
 
 export default () => {
   const [currenciesState, setCurrenciesState] = useState(currencies);
-  const [selectedBaseValue, setSelectedBaseValue] = useState(false);
-  const [selectedTargetValue, setSelectedTargetValue] = useState();
+  const [selectedBaseValue, setSelectedBaseValue] = useState('usd');
+  const [selectedTargetValue, setSelectedTargetValue] = useState('brl');
   const [showModalBaseValue, setShowModalBaseValue] = useState(false);
   const [showModalTargetValue, setShowModalTargetValue] = useState(false);
-  // getCurrencyConversor()
+  const [valueToConverter, setValueToConverter] = useState(null);
+  const [valueConverted, setValueConverted] = useState(null);
+  const dispatch = useDispatch()
   function toCapitalize(string) {
     return string.charAt(0).toUpperCase() + string.slice(1).toLowerCase();
+  }
+  
+  const convert = async () => {
+    dispatch(getCurrencyConverted(selectedBaseValue,selectedTargetValue))
+    // let value = await getCurrencyConversor(selectedBaseValue, selectedTargetValue)
+    // console.log('value')
+    // console.log(value)
+    // value = ( parseFloat(valueToConverter) * value).toFixed(2);
+    // setValueConverted(value)
   }
 
   return (
@@ -35,7 +49,7 @@ export default () => {
         }}
         onPress={() => setShowModalBaseValue(true)}
       >
-        <TextInput
+        {/* <TextInput
           placeholder={"Selecione a moeda base"}
           placeholderTextColor={"#888"}
           value={selectedBaseValue}
@@ -47,7 +61,28 @@ export default () => {
             fontSize: 20,
             width: "100%",
           }}
-        />
+        /> */}
+        <Text style={{
+            fontWeight: "bold",
+            alignSelf: "center",
+            lineHeight: 20,
+            fontSize: 20,
+            width: "100%",
+          }}>
+          {selectedBaseValue ? selectedBaseValue : "Selecione a moeda base"}
+        </Text>
+          {/* placeholder={"Selecione a moeda base"}
+          placeholderTextColor={"#888"}
+          value={selectedBaseValue}
+          disabled
+          style={{
+            fontWeight: "bold",
+            alignSelf: "center",
+            lineHeight: 20,
+            fontSize: 20,
+            width: "100%",
+          }}
+        /> */}
       </TouchableOpacity>
       <TouchableOpacity
         style={{
@@ -75,6 +110,51 @@ export default () => {
           }}
         />
       </TouchableOpacity>
+      <View
+        style={{
+          margin:"10%",
+          marginHorizontal: "20%",
+          justifyContent: "center",
+          alignItems: "center",
+          padding: 10,
+        }}
+        
+      >
+        <TextInput
+          placeholder={"Digite um valor"}
+          placeholderTextColor={"#888"}
+          value={valueToConverter}
+          onChangeText={(text)=>setValueToConverter(text)}
+          style={{
+            fontWeight: "bold",
+            alignSelf: "center",
+            lineHeight: 25,
+            fontSize: 20,
+            width: "100%",
+          }}
+        />
+        <Button style={{
+            borderRadius:'30%',
+            marginTop:'4.5%'
+        }} mode='contained' onPress={convert}>
+          <Text style={{fontWeight:'bold'}}>Converter</Text>
+        </Button>
+      </View>
+      {valueConverted && <View
+        style={{
+          margin:"10%",
+          marginHorizontal: "20%",
+          justifyContent: "center",
+          alignItems: "center",
+          padding: 10,
+        }}
+        
+      >
+        <Text
+          >
+            {valueConverted}    
+          </Text>
+      </View>}
 
       <BottomModal
         modalVisible={showModalBaseValue}
