@@ -2,8 +2,6 @@ import React from "react";
 import { SafeAreaView, StyleSheet } from "react-native";
 import { FlatGrid } from "react-native-super-grid";
 import RenderItemGrid from '../../components/RenderItemGrid';
-import imageEquation from '../../assets/equation.png'
-import imageCurrency from '../../assets/currency.png'
 
 const ImageFake = () => (
     <View
@@ -16,12 +14,12 @@ const ImageFake = () => (
     />
   );
 
-  
   export default function Menu({navigation}) {
     const dados = [
-      { id: 1, name: "Conversor de moedas", image: imageCurrency, onPress:()=>navigation.navigate('CurrencyConversor') },
-      { id: 2, name: "Resolvedor Equação 2º grau", image: imageEquation, onPress:()=>navigation.navigate('SecondDegreeEquation') },
-      { id: 3, name: "Bússola", image: ImageFake, onPress:()=>navigation.navigate('CurrencyConversor') },
+      { id: 1, name: "Conversor de moedas", image: 'attach-money', onPress:()=>navigation.navigate('CurrencyConversor') },
+      { id: 2, name: "Resolvedor Equação 2º grau", image: 'community-square-root', onPress:()=>navigation.navigate('SecondDegreeEquation') },
+      { id: 3, name: "Timer", image: 'watch-later', onPress:()=>navigation.navigate('Timer') },
+      // { id: 3, name: "Bússola", image: ImageFake, onPress:()=>navigation.navigate('CurrencyConversor') },
     //   { id: 2, name: "ArCondicionado", image: ImageFake },
     //   { id: 3, name: "Motriz", image: ImageFake },
     ];

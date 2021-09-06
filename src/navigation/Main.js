@@ -4,11 +4,11 @@ import {
   createStackNavigator,
   CardStyleInterpolators,
 } from "@react-navigation/stack";
-// import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { navigationRef } from "./NavigationService";
 import Menu from "../pages/Menu";
 import CurrencyConversor from "../pages/CurrencyConversor";
 import SecondDegreeEquation from "../pages/SecondDegreeEquation";
+import Timer from "../pages/Timer";
 
 const Stack = createStackNavigator();
 
@@ -37,6 +37,11 @@ const Main = memo(() => {
       <Stack.Screen
         name={"SecondDegreeEquation"}
         component={SecondDegreeEquation}
+        options={{ headerShown: false, headerMode: "screen" }}
+      />
+      <Stack.Screen
+        name={"Timer"}
+        component={Timer}
         options={{ headerShown: false, headerMode: "screen" }}
       />
       

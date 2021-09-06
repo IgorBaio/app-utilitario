@@ -8,15 +8,7 @@ export default () => {
   const [valorC, setValorC] = useState(0);
   const [resultado, setResultado] = useState("");
   const [alerta, setAlerta] = useState("");
-  /**
-     * System.out.println("Calculando a fórmula de Bhaskara");
-       System.out.println("Digite o valor de A: ");
-       double a = scan.nextDouble();
-       System.out.println("Digite o valor de B: ");
-       double b = scan.nextDouble();
-       System.out.println("Digite o valor de C: ");
-       double c = scan.nextDouble();
-     */
+  
   const calculate = () => {
     const delta = valorB * valorB - 4 * valorA * valorC;
     if (delta < 0) {
