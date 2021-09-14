@@ -9,8 +9,8 @@ import {
 
 const initialState = {
   loading: false,
-  baseCurrency:null,
-  targetCurrency:null,
+  baseCurrency: null,
+  targetCurrency: null,
   convertedValue: null,
 };
 
@@ -43,10 +43,9 @@ const saveReducer = (state = initialState, action) => {
             }
             */
     case GET_CURRENCY_CONVERTED_SUCCESS:
-      state.convertedValue = action.convertedValue;
-      // state.produtos = action.payload
-
-      return state;
+      console.log('action')
+      console.log(action)
+      return { ...state, convertedValue: action.payload };
     /*
             return {
                 ...state,
