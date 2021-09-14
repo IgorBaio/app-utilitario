@@ -12,7 +12,7 @@ import { getCurrencyConversor } from "../../../service/currencyService";
 import BottomModal from "../../components/BottomModal";
 import RadioButton from "../../components/RadioButton";
 import { Button } from "react-native-paper";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { getCurrencyConverted } from "../../store/actions";
 
 export default () => {
@@ -23,13 +23,17 @@ export default () => {
   const [showModalTargetValue, setShowModalTargetValue] = useState(false);
   const [valueToConverter, setValueToConverter] = useState(null);
   const [valueConverted, setValueConverted] = useState(null);
+  const convertedValue = useSelector(state=>state.convertedValue)
+  console.log(convertedValue)
   const dispatch = useDispatch()
   function toCapitalize(string) {
     return string.charAt(0).toUpperCase() + string.slice(1).toLowerCase();
   }
   
   const convert = async () => {
-    dispatch(getCurrencyConverted(selectedBaseValue,selectedTargetValue))
+    console.log('selectedBaseValue,selectedTargetValue')
+    console.log(selectedBaseValue,selectedTargetValue,valueToConverter)
+    dispatch(getCurrencyConverted({selectedBaseValue,selectedTargetValue}))
     // let value = await getCurrencyConversor(selectedBaseValue, selectedTargetValue)
     // console.log('value')
     // console.log(value)

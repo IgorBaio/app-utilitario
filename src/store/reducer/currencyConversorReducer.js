@@ -31,8 +31,9 @@ const saveReducer = (state = initialState, action) => {
     case GET_CURRENCY_CONVERTED:
       console.log('action')
       console.log(action)
-      state.baseCurrency = action.payload.baseCurrency
-      state.targetCurrency = action.payload.targetCurrency
+      state.baseCurrency = action.payload.selectedBaseValue
+      state.targetCurrency = action.payload.selectedTargetValue;
+      state.valueToConvert = action.payload.valueToConverter
 
       return state;
     /*

@@ -10,8 +10,8 @@ export default function RadioButton(props) {
       return onChange();
     }
   }
-  console.log('props')
-  console.log(props.label)
+  // console.log('props')
+  // console.log(props.label)
   return (
     <View style={styles.WrapperCheckBox}>
       <TouchableOpacity onPress={handleChange} style={[

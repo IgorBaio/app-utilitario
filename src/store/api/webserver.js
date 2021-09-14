@@ -5,6 +5,7 @@ const client = axios.create({
 });
 
 client.interceptors.request.use(async config => {
+  return config
 });
 
 export default client;
