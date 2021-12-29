@@ -6,14 +6,11 @@ import { getCurrencyConversorValue } from "../api";
 
 function* getCurrencyConversorSaga(obj) {
   try {
-    console.log('obj sagas')
-    console.log(obj)
     const valueConverted = yield call(getCurrencyConversorValue, obj);
-    console.log('valueConverted', valueConverted)
    
       yield put(
         getCurrencyConvertedSuccess({
-          payload: valueConverted,
+          valueConverted,
         })
       );
   } catch (error) {

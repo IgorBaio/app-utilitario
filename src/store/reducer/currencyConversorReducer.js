@@ -14,7 +14,7 @@ const initialState = {
   convertedValue: null,
 };
 
-const saveReducer = (state = initialState, action) => {
+export default function saveReducer(state = initialState, action) {
   switch (action.type) {
     case ITENS:
       state.itens = action.itens;
@@ -31,11 +31,13 @@ const saveReducer = (state = initialState, action) => {
     case GET_CURRENCY_CONVERTED:
       console.log('action')
       console.log(action)
-      state.baseCurrency = action.payload.selectedBaseValue
-      state.targetCurrency = action.payload.selectedTargetValue;
-      state.valueToConvert = action.payload.valueToConverter
-
-      return state;
+      return {
+        ...state,
+        baseCurrency: action.payload.selectedBaseValue,
+        targetCurrency: action.payload.selectedTargetValue,
+        valueToConvert: action.payload.valueToConverter
+      }
+      
     /*
             return {
                 ...state,
@@ -43,10 +45,11 @@ const saveReducer = (state = initialState, action) => {
             }
             */
     case GET_CURRENCY_CONVERTED_SUCCESS:
-      state.convertedValue = action.convertedValue;
-      // state.produtos = action.payload
-
-      return state;
+      console.log(`aq`,action)
+      return {
+        ...state,
+        convertedValue: action.payload.valueConverted
+      }
     /*
             return {
                 ...state,
@@ -58,4 +61,3 @@ const saveReducer = (state = initialState, action) => {
   }
 };
 
-export default saveReducer;

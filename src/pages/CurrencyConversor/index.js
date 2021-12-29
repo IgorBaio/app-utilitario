@@ -14,6 +14,7 @@ import RadioButton from "../../components/RadioButton";
 import { Button } from "react-native-paper";
 import { useDispatch, useSelector } from "react-redux";
 import { getCurrencyConverted } from "../../store/actions";
+import { ConvertedValueText } from "../../components/ConvertedValueText";
 
 export default () => {
   const [currenciesState, setCurrenciesState] = useState(currencies);
@@ -23,8 +24,8 @@ export default () => {
   const [showModalTargetValue, setShowModalTargetValue] = useState(false);
   const [valueToConverter, setValueToConverter] = useState(null);
   const [valueConverted, setValueConverted] = useState(null);
-  const convertedValue = useSelector(state=>state.convertedValue)
-  console.log(convertedValue)
+  const convertedValue = useSelector(state=>state.currency.convertedValue)
+  console.log('convertedValue', convertedValue)
   const dispatch = useDispatch()
   function toCapitalize(string) {
     return string.charAt(0).toUpperCase() + string.slice(1).toLowerCase();
@@ -33,12 +34,7 @@ export default () => {
   const convert = async () => {
     console.log('selectedBaseValue,selectedTargetValue')
     console.log(selectedBaseValue,selectedTargetValue,valueToConverter)
-    dispatch(getCurrencyConverted({selectedBaseValue,selectedTargetValue}))
-    // let value = await getCurrencyConversor(selectedBaseValue, selectedTargetValue)
-    // console.log('value')
-    // console.log(value)
-    // value = ( parseFloat(valueToConverter) * value).toFixed(2);
-    // setValueConverted(value)
+    dispatch(getCurrencyConverted({selectedBaseValue,selectedTargetValue,valueToConverter}))
   }
 
   return (
@@ -48,24 +44,11 @@ export default () => {
           marginHorizontal: "20%",
           justifyContent: "center",
           alignItems: "center",
-          backgroundColor: "red",
+          backgroundColor: `#c0c0c0`,
           padding: 10,
         }}
         onPress={() => setShowModalBaseValue(true)}
       >
-        {/* <TextInput
-          placeholder={"Selecione a moeda base"}
-          placeholderTextColor={"#888"}
-          value={selectedBaseValue}
-          disabled
-          style={{
-            fontWeight: "bold",
-            alignSelf: "center",
-            lineHeight: 20,
-            fontSize: 20,
-            width: "100%",
-          }}
-        /> */}
         <Text style={{
             fontWeight: "bold",
             alignSelf: "center",
@@ -75,44 +58,28 @@ export default () => {
           }}>
           {selectedBaseValue ? selectedBaseValue : "Selecione a moeda base"}
         </Text>
-          {/* placeholder={"Selecione a moeda base"}
-          placeholderTextColor={"#888"}
-          value={selectedBaseValue}
-          disabled
-          style={{
-            fontWeight: "bold",
-            alignSelf: "center",
-            lineHeight: 20,
-            fontSize: 20,
-            width: "100%",
-          }}
-        /> */}
       </TouchableOpacity>
       <TouchableOpacity
         style={{
           marginHorizontal: "20%",
           justifyContent: "center",
           alignItems: "center",
-          backgroundColor: "red",
+          backgroundColor: "#c0c0c0",
           padding: 10,
         }}
         onPress={() => {
           setShowModalTargetValue(true);
         }}
-      >
-        <TextInput
-          placeholder={"Selecione a moeda alvo"}
-          placeholderTextColor={"#888"}
-          value={selectedTargetValue}
-          onChangeText={null}
-          style={{
-            fontWeight: "bold",
-            alignSelf: "center",
-            lineHeight: 20,
-            fontSize: 20,
-            width: "100%",
-          }}
-        />
+      ><Text style={{
+        fontWeight: "bold",
+        alignSelf: "center",
+        lineHeight: 20,
+        fontSize: 20,
+        width: "100%",
+      }}>
+      {selectedTargetValue ? selectedTargetValue : "Selecione a moeda base"}
+    </Text>
+        
       </TouchableOpacity>
       <View
         style={{
@@ -144,7 +111,7 @@ export default () => {
           <Text style={{fontWeight:'bold'}}>Converter</Text>
         </Button>
       </View>
-      {valueConverted && <View
+      {convertedValue && <View
         style={{
           margin:"10%",
           marginHorizontal: "20%",
@@ -154,10 +121,10 @@ export default () => {
         }}
         
       >
-        <Text
+        <ConvertedValueText
           >
-            {valueConverted}    
-          </Text>
+            {convertedValue}    
+          </ConvertedValueText>
       </View>}
 
       <BottomModal
@@ -171,9 +138,9 @@ export default () => {
                 <View key={genre.id} style={{}}>
                   <RadioButton
                     label={toCapitalize(genre.name)}
-                    labelStyle={{ color: "#fff", fontSize: 16 }}
-                    fillColor={"orange"}
-                    checkColor={"orange"}
+                    labelStyle={{ color: "#fff", fontSize: 16, margin:'2%' }}
+                    fillColor={"#4F249D"}
+                    checkColor={"#4F249D"}
                     value={selectedBaseValue == genre.name}
                     onChange={() => setSelectedBaseValue(genre.name)}
                   />
@@ -186,7 +153,7 @@ export default () => {
       <BottomModal
         modalVisible={showModalTargetValue}
         setModalVisible={setShowModalTargetValue}
-        title={"Selecione a moeda base"}
+        title={"Selecione a moeda alvo"}
         content={
           <View>
             {currenciesState.map((genre, index) => {
@@ -195,8 +162,8 @@ export default () => {
                   <RadioButton
                     label={toCapitalize(genre.name)}
                     labelStyle={{ color: "#fff", fontSize: 16 }}
-                    fillColor={"orange"}
-                    checkColor={"orange"}
+                    fillColor={"#4F249D"}
+                    checkColor={"#4F249D"}
                     value={selectedTargetValue == genre.name}
                     onChange={() => setSelectedTargetValue(genre.name)}
                   />

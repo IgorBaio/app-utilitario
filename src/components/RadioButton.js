@@ -52,7 +52,10 @@ const styles = StyleSheet.create({
   },
   WrapperCheckBox: {
     flexDirection: "row",
-    alignItems: "center"
+    alignItems: "center",
+    width: '100%',
+    margin: '2%',
+    
   },
   LabelCheck: {
     color: '#000',

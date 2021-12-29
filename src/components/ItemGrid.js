@@ -77,8 +77,6 @@ const styles = StyleSheet.create({
     justifyContent: "center",
   },
   image: {
-    flex: 1,
     aspectRatio: 1.5,
-    resizeMode: "contain",
   },
 });
