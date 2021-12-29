@@ -3,6 +3,7 @@ import { CountdownCircleTimer } from "react-native-countdown-circle-timer";
 import { MaterialIcons } from "@expo/vector-icons";
 import { TextInput, Title } from "react-native-paper";
 import { Alert, SafeAreaView, Text, View } from "react-native";
+import { TitleTimer } from "../../components/TitleTimer";
 
 const InformCode = () => {
   const [time, setTime] = useState(0);
@@ -68,6 +69,7 @@ const InformCode = () => {
     // subTitle={subTitle}
     // visible={visibility}
     >
+      <TitleTimer>Digite o valor do Timer:</TitleTimer>
       <TextInput
         label="Valor do timer"
         value={time}
