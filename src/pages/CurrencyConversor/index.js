@@ -19,24 +19,30 @@ import { scaleHeight } from "../../../utils/size";
 
 export default () => {
   const [currenciesState, setCurrenciesState] = useState(currencies);
-  const [selectedBaseValue, setSelectedBaseValue] = useState('usd');
-  const [selectedTargetValue, setSelectedTargetValue] = useState('brl');
+  const [selectedBaseValue, setSelectedBaseValue] = useState("usd");
+  const [selectedTargetValue, setSelectedTargetValue] = useState("brl");
   const [showModalBaseValue, setShowModalBaseValue] = useState(false);
   const [showModalTargetValue, setShowModalTargetValue] = useState(false);
   const [valueToConverter, setValueToConverter] = useState(null);
   const [valueConverted, setValueConverted] = useState(null);
-  const convertedValue = useSelector(state=>state.currency.convertedValue)
-  console.log('convertedValue', convertedValue)
-  const dispatch = useDispatch()
+  const convertedValue = useSelector((state) => state.currency.convertedValue);
+  console.log("convertedValue", convertedValue);
+  const dispatch = useDispatch();
   function toCapitalize(string) {
     return string.charAt(0).toUpperCase() + string.slice(1).toLowerCase();
   }
-  
+
   const convert = async () => {
-    console.log('selectedBaseValue,selectedTargetValue')
-    console.log(selectedBaseValue,selectedTargetValue,valueToConverter)
-    dispatch(getCurrencyConverted({selectedBaseValue,selectedTargetValue,valueToConverter}))
-  }
+    console.log("selectedBaseValue,selectedTargetValue");
+    console.log(selectedBaseValue, selectedTargetValue, valueToConverter);
+    dispatch(
+      getCurrencyConverted({
+        selectedBaseValue,
+        selectedTargetValue,
+        valueToConverter,
+      })
+    );
+  };
 
   return (
     <SafeAreaView>
@@ -51,13 +57,15 @@ export default () => {
         }}
         onPress={() => setShowModalBaseValue(true)}
       >
-        <Text style={{
+        <Text
+          style={{
             fontWeight: "bold",
             alignSelf: "center",
             lineHeight: 20,
             fontSize: 20,
             width: "100%",
-          }}>
+          }}
+        >
           {selectedBaseValue ? selectedBaseValue : "Selecione a moeda base"}
         </Text>
       </TouchableOpacity>
@@ -72,32 +80,34 @@ export default () => {
         onPress={() => {
           setShowModalTargetValue(true);
         }}
-      ><Text style={{
-        fontWeight: "bold",
-        alignSelf: "center",
-        lineHeight: 20,
-        fontSize: 20,
-        width: "100%",
-      }}>
-      {selectedTargetValue ? selectedTargetValue : "Selecione a moeda base"}
-    </Text>
-        
+      >
+        <Text
+          style={{
+            fontWeight: "bold",
+            alignSelf: "center",
+            lineHeight: 20,
+            fontSize: 20,
+            width: "100%",
+          }}
+        >
+          {selectedTargetValue ? selectedTargetValue : "Selecione a moeda base"}
+        </Text>
       </TouchableOpacity>
       <View
         style={{
-          margin:"10%",
+          margin: "10%",
           marginHorizontal: "20%",
           justifyContent: "center",
           alignItems: "center",
           padding: 10,
         }}
-        
       >
         <TextInput
           placeholder={"Digite um valor"}
+          keyboardType="number-pad"
           placeholderTextColor={"#888"}
           value={valueToConverter}
-          onChangeText={(text)=>setValueToConverter(text)}
+          onChangeText={(text) => setValueToConverter(text)}
           style={{
             fontWeight: "bold",
             alignSelf: "center",
@@ -106,28 +116,30 @@ export default () => {
             width: "100%",
           }}
         />
-        <Button style={{
+        <Button
+          style={{
             borderRadius: scaleHeight(30),
-            marginTop:'4.5%'
-        }} mode='contained' onPress={convert}>
-          <Text style={{fontWeight:'bold'}}>Converter</Text>
+            marginTop: "4.5%",
+          }}
+          mode="contained"
+          onPress={convert}
+        >
+          <Text style={{ fontWeight: "bold" }}>Converter</Text>
         </Button>
       </View>
-      {convertedValue && <View
-        style={{
-          margin:"10%",
-          marginHorizontal: "20%",
-          justifyContent: "center",
-          alignItems: "center",
-          padding: 10,
-        }}
-        
-      >
-        <ConvertedValueText
-          >
-            {convertedValue}    
-          </ConvertedValueText>
-      </View>}
+      {convertedValue && (
+        <View
+          style={{
+            margin: "10%",
+            marginHorizontal: "20%",
+            justifyContent: "center",
+            alignItems: "center",
+            padding: 10,
+          }}
+        >
+          <ConvertedValueText>{convertedValue}</ConvertedValueText>
+        </View>
+      )}
 
       <BottomModal
         modalVisible={showModalBaseValue}
@@ -140,7 +152,7 @@ export default () => {
                 <View key={genre.id} style={{}}>
                   <RadioButton
                     label={toCapitalize(genre.name)}
-                    labelStyle={{ color: "#fff", fontSize: 16, margin:'2%' }}
+                    labelStyle={{ color: "#fff", fontSize: 16, margin: "2%" }}
                     fillColor={"#4F249D"}
                     checkColor={"#4F249D"}
                     value={selectedBaseValue == genre.name}

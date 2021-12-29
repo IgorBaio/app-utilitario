@@ -34,18 +34,21 @@ export default () => {
         <TextInput
           label="Valor de A"
           value={valorA}
+          keyboardType='number-pad'
           onChangeText={(text) => setValorA(text)}
         />
         <Title>Digite o valor de B</Title>
         <TextInput
           label="Valor de B"
           value={valorB}
+          keyboardType='number-pad'
           onChangeText={(text) => setValorB(text)}
         />
         <Title>Digite o valor de C</Title>
         <TextInput
           label="Valor de C"
           value={valorC}
+          keyboardType='number-pad'
           onChangeText={(text) => setValorC(text)}
         />
         <Button
