@@ -5,6 +5,7 @@ export const getCurrencyConversorValue = async (obj) => {
     // const response = await axios.get(`https://www.floatrates.com/daily/${obj?.payload?.selectedTargetValue}.json`);
     const response = await axios.get(`https://api.fastforex.io/convert?from=${obj?.payload?.selectedBaseValue}&to=${obj?.payload?.selectedTargetValue}&amount=${obj?.payload?.valueToConverter}&api_key=demo`);
     
+
     if (!response && !response?.data) {
       return false;
     }

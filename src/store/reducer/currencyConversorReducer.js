@@ -9,8 +9,8 @@ import {
 
 const initialState = {
   loading: false,
-  baseCurrency:null,
-  targetCurrency:null,
+  baseCurrency: null,
+  targetCurrency: null,
   convertedValue: null,
 };
 

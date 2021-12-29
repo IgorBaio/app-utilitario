@@ -3,6 +3,7 @@ import { StyleSheet, View } from "react-native";
 import styled from "styled-components/native";
 import { Modal, Card, useTheme, Subheading } from "react-native-paper";
 import { MaterialIcons, MaterialCommunityIcons } from "@expo/vector-icons";
+import { scaleHeight } from '../../utils/size'
 
 const MyImage = styled.Image`
   display: flex;
@@ -30,7 +31,7 @@ export default ItemGrid = ({ name, image, onPress, dispatch, navigation }) => {
         marginLeft: 5,
         marginRight: 5,
         elevation: 5,
-        borderRadius: 20,
+        borderRadius: scaleHeight(20),
         backgroundColor: "#4F249D",
         color: "#000",
         flex: 1,
@@ -39,8 +40,8 @@ export default ItemGrid = ({ name, image, onPress, dispatch, navigation }) => {
     >
       <Card.Content>
         {image !== "" &&
-        typeof image !== "function" &&
-        typeof image !== "string" ? (
+          typeof image !== "function" &&
+          typeof image !== "string" ? (
           <MyImage source={image} style={styles.image} />
         ) : typeof image === "string" && image.includes("community") ? (
           <MaterialCommunityIcons

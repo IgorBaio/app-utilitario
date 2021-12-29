@@ -7,18 +7,19 @@ import {
   Pressable,
   ScrollView,
   Animated,
-  TouchableWithoutFeedback, 
+  TouchableWithoutFeedback,
   TouchableOpacity
 } from "react-native";
+import { scaleHeight } from "../../utils/size";
 import SvgBackArrow from '../assets/SvgBackArrow';
 
 const BottomModal = memo(({ modalVisible, setModalVisible, content, title }) => {
 
   const [animationBackground, setAnimationBackground] = useState(new Animated.Value(0));
- 
+
   const showAnimationBackground = () => {
     Animated.timing(animationBackground, {
-      toValue:1,
+      toValue: 1,
       duration: 500,
       useNativeDriver: false
     }).start()
@@ -26,7 +27,7 @@ const BottomModal = memo(({ modalVisible, setModalVisible, content, title }) => 
 
   const dismissModal = () => {
     Animated.timing(animationBackground, {
-      toValue:0,
+      toValue: 0,
       duration: 100,
       useNativeDriver: false
     }).start(() => {
@@ -35,9 +36,9 @@ const BottomModal = memo(({ modalVisible, setModalVisible, content, title }) => 
     });
   }
 
-  const backgroundInterpolation =  animationBackground.interpolate({
+  const backgroundInterpolation = animationBackground.interpolate({
     inputRange: [0, 1],
-    outputRange:["#66666600" , "#66666670"]
+    outputRange: ["#66666600", "#66666670"]
   });
 
   return (
@@ -50,12 +51,12 @@ const BottomModal = memo(({ modalVisible, setModalVisible, content, title }) => 
       statusBarTranslucent={true}
       accessible
       accessibilityViewIsModal
-    >   
-        <Animated.View style={[styles.wrapperModal, {
-          backgroundColor: backgroundInterpolation
-        }]}>
-        <TouchableOpacity activeOpacity={1} style={styles.wrapperModal} onPress={() =>  dismissModal(false)}>   
-          
+    >
+      <Animated.View style={[styles.wrapperModal, {
+        backgroundColor: backgroundInterpolation
+      }]}>
+        <TouchableOpacity activeOpacity={1} style={styles.wrapperModal} onPress={() => dismissModal(false)}>
+
           <View style={styles.centeredView}>
             <TouchableWithoutFeedback>
               <View style={styles.modalView} accessible accessibilityViewIsModal>
@@ -63,8 +64,8 @@ const BottomModal = memo(({ modalVisible, setModalVisible, content, title }) => 
                   style={[styles.button, styles.buttonClose]}
                   onPress={() => dismissModal(false)}
                 >
+                  <SvgBackArrow color={'#4F249D'} />
                   <Text style={styles.textModalClose}>Voltar</Text>
-                  <SvgBackArrow color={'black'} />
                 </Pressable>
                 <ScrollView style={styles.scrollView}>
                   <Text style={styles.textModalTitle}>{title}</Text>
@@ -73,32 +74,32 @@ const BottomModal = memo(({ modalVisible, setModalVisible, content, title }) => 
               </View>
             </TouchableWithoutFeedback>
           </View>
-      </TouchableOpacity>
-        </Animated.View>
+        </TouchableOpacity>
+      </Animated.View>
     </Modal>
   );
 });
 export default BottomModal;
 
 const styles = StyleSheet.create({
-  scrollView:{
-    marginTop:20,
+  scrollView: {
+    marginTop: 20,
   },
-  wrapperModal:{
+  wrapperModal: {
     position: 'absolute',
     top: 0,
     bottom: 0,
     left: 0,
     right: 0,
   },
-  button:{
-      flexDirection:'row',
-      alignItems: 'center'
+  button: {
+    flexDirection: 'row',
+    alignItems: 'center'
   },
   centeredView: {
     marginTop: (100),
-    flex:1,
-    justifyContent:'flex-end'
+    flex: 1,
+    justifyContent: 'flex-end'
   },
   modalView: {
     backgroundColor: "white",
@@ -129,12 +130,12 @@ const styles = StyleSheet.create({
     fontSize: (18),
     color: '#AFA22C',
     fontWeight: "bold",
-    marginBottom: (10),
+    marginBottom: scaleHeight(10),
   },
   textModalBody: {
     fontFamily: 'Montserrat',
     fontWeight: "300",
     color: 'gray',
-    fontSize: (16),
+    fontSize: scaleHeight(16),
   },
 });
