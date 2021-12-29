@@ -1,6 +1,7 @@
 import React, { useState } from "react";
-import { SafeAreaView, Text, View } from "react-native";
+import { Platform, SafeAreaView, Text, View } from "react-native";
 import { Button, TextInput, Title } from "react-native-paper";
+import { scaleHeight } from "../../../utils/size";
 
 export default () => {
   const [valorA, setValorA] = useState(0);
@@ -8,7 +9,7 @@ export default () => {
   const [valorC, setValorC] = useState(0);
   const [resultado, setResultado] = useState("");
   const [alerta, setAlerta] = useState("");
-  
+
   const calculate = () => {
     const delta = valorB * valorB - 4 * valorA * valorC;
     if (delta < 0) {
@@ -26,7 +27,9 @@ export default () => {
   };
   return (
     <SafeAreaView>
-      <View style={{ padding: 10 }}>
+      <View
+        style={{ padding: 10, marginTop: Platform.OS === "android" ? "10%" : 0 }}
+      >
         <Title>Digite o valor de A</Title>
         <TextInput
           label="Valor de A"
@@ -45,11 +48,15 @@ export default () => {
           value={valorC}
           onChangeText={(text) => setValorC(text)}
         />
-        <Button style={{
-            borderRadius:'30%',
-            marginTop:'2.5%'
-        }} mode='contained' onPress={calculate}>
-          <Text style={{fontWeight:'bold'}}>Calcular</Text>
+        <Button
+          style={{
+            borderRadius: scaleHeight(30),
+            marginTop: "2.5%",
+          }}
+          mode="contained"
+          onPress={calculate}
+        >
+          <Text style={{ fontWeight: "bold" }}>Calcular</Text>
         </Button>
         {alerta ? (
           <Text

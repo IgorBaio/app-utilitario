@@ -1,17 +1,15 @@
 import React from 'react';
 import PropTypes from "prop-types"
 import { View, TouchableOpacity, Text, StyleSheet, Pressable } from 'react-native';
-import { scaleHeight } from '../../utils/size';
 
 export default function RadioButton(props) {
-
+  
   function handleChange() {
     const { onChange } = props;
     if (onChange) {
       return onChange();
     }
   }
-
   return (
     <View style={styles.WrapperCheckBox}>
       <TouchableOpacity onPress={handleChange} style={[
@@ -28,7 +26,7 @@ export default function RadioButton(props) {
       </TouchableOpacity>
       <Pressable onPress={handleChange}>
         <Text style={styles.LabelCheck}>
-          {props.label}
+            {props.label}
         </Text>
       </Pressable>
     </View>
@@ -42,12 +40,12 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     justifyContent: "center",
     alignItems: "center",
-    borderRadius: scaleHeight(20)
+    borderRadius:20
   },
-  fill: {
-    width: 10,
-    height: 10,
-    borderRadius: scaleHeight(10)
+  fill:{
+      width:10,
+      height:10,
+      borderRadius:10
   },
   WrapperCheckBox: {
     flexDirection: "row",
@@ -59,8 +57,8 @@ const styles = StyleSheet.create({
   LabelCheck: {
     color: '#000',
     marginLeft: 6,
-    fontSize: 18,
-    fontWeight: '500'
+    fontSize:18,
+    fontWeight:'700'
   }
 })
 
