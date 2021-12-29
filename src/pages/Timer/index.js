@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { CountdownCircleTimer } from "react-native-countdown-circle-timer";
 import { MaterialIcons } from "@expo/vector-icons";
 import { TextInput, Title } from "react-native-paper";
-import { Alert, SafeAreaView, Text, View } from "react-native";
+import { Alert, Platform, SafeAreaView, Text, View } from "react-native";
 import { TitleTimer } from "../../components/TitleTimer";
 
 const InformCode = () => {
@@ -70,8 +70,9 @@ const InformCode = () => {
       </TitleTimer>
       <TextInput
         label="Valor do timer"
+        keyboardType="number-pad"
         value={time}
-        onChangeText={(text) => setTime(text)}
+        onChangeText={(text) => setTime(text.replace("-", ""))}
         onBlur={() => setIsPlaying(true)}
       />
 
