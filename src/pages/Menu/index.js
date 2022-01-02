@@ -19,8 +19,9 @@ export default function Menu({ navigation }) {
   const dados = [
     { id: 1, name: "Conversor de moedas", image: 'attach-money', onPress: () => navigation.navigate('CurrencyConversor') },
     { id: 2, name: "Resolvedor Equação 2º grau", image: 'community-square-root', onPress: () => navigation.navigate('SecondDegreeEquation') },
-    { id: 3, name: "Timer", image: 'watch-later', onPress:()=>navigation.navigate('Timer') },//TODO pronto, só embelezar
-    // { id: 3, name: "Bússola", image: ImageFake, onPress:()=>navigation.navigate('CurrencyConversor') },
+    { id: 3, name: "Timer", image: 'watch-later', onPress:()=>navigation.navigate('Timer') },
+    { id: 4, name: "Calculadora de Regra de 3", image: 'sync-alt', onPress:()=>navigation.navigate('ThirdRule') },
+    // { id: 3, name: "Bússola", image: ImageFake, onPress:()=>navigation.navigate('CurrencyConversor') },//TODO pronto, só embelezar
   ];
   return (
     <SafeAreaView style={{

@@ -13,7 +13,7 @@ const InputArea = styled.View`
   justify-content: center;
   border: 2px;
   border-color: #fff;
-  border-radius: 18;
+  border-radius: 18px;
   margin-left: 4%;
   margin-right: 2%;
 `;

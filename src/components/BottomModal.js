@@ -120,20 +120,17 @@ const styles = StyleSheet.create({
   },
   textModalClose: {
     fontSize: (16),
-    fontFamily: 'Montserrat',
     color: '#AFA22C',
     fontWeight: "600",
     marginRight: 5
   },
   textModalTitle: {
-    fontFamily: "Mulish",
     fontSize: (18),
     color: '#AFA22C',
     fontWeight: "bold",
     marginBottom: scaleHeight(10),
   },
   textModalBody: {
-    fontFamily: 'Montserrat',
     fontWeight: "300",
     color: 'gray',
     fontSize: scaleHeight(16),

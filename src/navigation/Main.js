@@ -9,6 +9,7 @@ import Menu from "../pages/Menu";
 import CurrencyConversor from "../pages/CurrencyConversor";
 import SecondDegreeEquation from "../pages/SecondDegreeEquation";
 import Timer from "../pages/Timer";
+import ThirdRule from "../pages/ThirdRule";
 
 const Stack = createStackNavigator();
 
@@ -42,6 +43,11 @@ const Main = memo(() => {
       <Stack.Screen
         name={"Timer"}
         component={Timer}
+        options={{ headerShown: false, headerMode: "screen" }}
+      />
+      <Stack.Screen
+        name={"ThirdRule"}
+        component={ThirdRule}
         options={{ headerShown: false, headerMode: "screen" }}
       />
       
