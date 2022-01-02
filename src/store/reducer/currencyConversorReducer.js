@@ -16,18 +16,8 @@ const initialState = {
 
 export default function saveReducer(state = initialState, action) {
   switch (action.type) {
-    case ITENS:
-      state.itens = action.itens;
-      return state;
-    case PAGE:
-      state.page = action.page;
-      return state;
-    case LOGIN:
-      state.user = action.user;
-      return state;
     case SET_INITIALS_STATE:
-      state = initialState;
-      return state;
+      return initialState;
     case GET_CURRENCY_CONVERTED:
       console.log('action')
       console.log(action)

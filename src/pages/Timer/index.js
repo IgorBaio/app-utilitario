@@ -4,6 +4,8 @@ import { MaterialIcons } from "@expo/vector-icons";
 import { TextInput, Title } from "react-native-paper";
 import { Alert, Platform, SafeAreaView, Text, View } from "react-native";
 import { TitleTimer } from "../../components/TitleTimer";
+import colors from "../../../utils/colors";
+import Input from "../../components/Input";
 
 const InformCode = () => {
   const [time, setTime] = useState(0);
@@ -60,22 +62,18 @@ const InformCode = () => {
   }, [isPlaying]);
 
   return (
-    <SafeAreaView
-    // title={sectionTitle}
-    // subTitle={subTitle}
-    // visible={visibility}
-    >
+    <SafeAreaView>
       <TitleTimer style={{ marginTop: Platform.OS === "android" ? "10%" : 0 }}>
-        Digite o valor do Timer:
+        Timer:
       </TitleTimer>
-      <TextInput
-        label="Valor do timer"
-        keyboardType="number-pad"
-        value={time}
-        onChangeText={(text) => setTime(text.replace("-", ""))}
-        onBlur={() => setIsPlaying(true)}
-      />
-
+      <Input
+          placeholder="Digite o valor do Timer em segundos"
+          borderColor={colors.purpleCommon}
+          onChangeText={(text) => setTime(text.replace("-", ""))}
+          onBlur={() => setIsPlaying(true)}
+          keyboardType="number-pad"
+          value={time}
+        />
       <View
         style={{
           margin: "20%",
@@ -90,11 +88,6 @@ const InformCode = () => {
       </View>
     </SafeAreaView>
   );
-  // return(
-  //   <SafeAreaView>
-  //     <Text>Ola</Text>
-  //   </SafeAreaView>
-  // )
 };
 
 export default InformCode;

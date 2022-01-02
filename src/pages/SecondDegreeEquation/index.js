@@ -1,7 +1,10 @@
 import React, { useState } from "react";
 import { Platform, SafeAreaView, Text, View } from "react-native";
 import { Button, TextInput, Title } from "react-native-paper";
+import colors from "../../../utils/colors";
 import { scaleHeight } from "../../../utils/size";
+import Input from "../../components/Input";
+import { styles } from "./styles";
 
 export default () => {
   const [valorA, setValorA] = useState(0);
@@ -30,23 +33,26 @@ export default () => {
       <View
         style={{ padding: 10, marginTop: Platform.OS === "android" ? "10%" : 0 }}
       >
-        <Title>Digite o valor de A</Title>
-        <TextInput
-          label="Valor de A"
+        <Title style={styles.title}>Digite o valor de A</Title>
+         <Input
+          placeholder="Valor de A"
+          borderColor={colors.purpleCommon}
           value={valorA}
           keyboardType='number-pad'
           onChangeText={(text) => setValorA(text)}
         />
-        <Title>Digite o valor de B</Title>
-        <TextInput
-          label="Valor de B"
+        <Title style={[styles.title, styles.titleDistance]}>Digite o valor de B</Title>
+        <Input
+          placeholder="Valor de B"
+          borderColor={colors.purpleCommon}
           value={valorB}
           keyboardType='number-pad'
           onChangeText={(text) => setValorB(text)}
         />
-        <Title>Digite o valor de C</Title>
-        <TextInput
-          label="Valor de C"
+        <Title style={[styles.title, styles.titleDistance]}>Digite o valor de C</Title>
+        <Input
+          placeholder="Valor de C"
+          borderColor={colors.purpleCommon}
           value={valorC}
           keyboardType='number-pad'
           onChangeText={(text) => setValorC(text)}

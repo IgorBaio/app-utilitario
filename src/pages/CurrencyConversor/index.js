@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   SafeAreaView,
   Text,
@@ -16,6 +16,9 @@ import { useDispatch, useSelector } from "react-redux";
 import { getCurrencyConverted } from "../../store/actions";
 import { ConvertedValueText } from "../../components/ConvertedValueText";
 import { scaleHeight } from "../../../utils/size";
+import { styles } from "./styles";
+import { setInitialsState } from "../../store/actions/currencyConversor";
+import colors from "../../../utils/colors";
 
 export default () => {
   const [currenciesState, setCurrenciesState] = useState(currencies);
@@ -26,15 +29,14 @@ export default () => {
   const [valueToConverter, setValueToConverter] = useState(null);
   const [valueConverted, setValueConverted] = useState(null);
   const convertedValue = useSelector((state) => state.currency.convertedValue);
-  console.log("convertedValue", convertedValue);
+
   const dispatch = useDispatch();
+
   function toCapitalize(string) {
     return string.charAt(0).toUpperCase() + string.slice(1).toLowerCase();
   }
 
   const convert = async () => {
-    console.log("selectedBaseValue,selectedTargetValue");
-    console.log(selectedBaseValue, selectedTargetValue, valueToConverter);
     dispatch(
       getCurrencyConverted({
         selectedBaseValue,
@@ -43,6 +45,10 @@ export default () => {
       })
     );
   };
+
+  useEffect(() => {
+    dispatch(setInitialsState())
+  }, []);
 
   return (
     <SafeAreaView>
@@ -66,7 +72,9 @@ export default () => {
             width: "100%",
           }}
         >
-          {selectedBaseValue ? selectedBaseValue : "Selecione a moeda base"}
+          {selectedBaseValue
+            ? selectedBaseValue.toUpperCase()
+            : "Selecione a moeda base"}
         </Text>
       </TouchableOpacity>
       <TouchableOpacity
@@ -90,7 +98,9 @@ export default () => {
             width: "100%",
           }}
         >
-          {selectedTargetValue ? selectedTargetValue : "Selecione a moeda base"}
+          {selectedTargetValue
+            ? selectedTargetValue.toUpperCase()
+            : "Selecione a moeda base"}
         </Text>
       </TouchableOpacity>
       <View
@@ -147,16 +157,20 @@ export default () => {
         title={"Selecione a moeda base"}
         content={
           <View>
-            {currenciesState.map((genre, index) => {
+            {currenciesState.map((currency, index) => {
               return (
-                <View key={genre.id} style={{}}>
+                <View key={currency.id} style={{}}>
                   <RadioButton
-                    label={toCapitalize(genre.name)}
+                    label={`${toCapitalize(currency.name)} - ${currency.title}`}
                     labelStyle={{ color: "#fff", fontSize: 16, margin: "2%" }}
-                    fillColor={"#4F249D"}
-                    checkColor={"#4F249D"}
-                    value={selectedBaseValue == genre.name}
-                    onChange={() => setSelectedBaseValue(genre.name)}
+                    styleView={styles.labelStyle}
+                    fillColor={colors.purpleCommon}
+                    checkColor={colors.purpleCommon}
+                    value={selectedBaseValue == currency.name}
+                    onChange={() => {
+                      setSelectedBaseValue(currency.name);
+                      setShowModalBaseValue(false);
+                    }}
                   />
                 </View>
               );
@@ -170,16 +184,20 @@ export default () => {
         title={"Selecione a moeda alvo"}
         content={
           <View>
-            {currenciesState.map((genre, index) => {
+            {currenciesState.map((currency, index) => {
               return (
-                <View key={genre.id} style={{}}>
+                <View key={currency.id} style={{}}>
                   <RadioButton
-                    label={toCapitalize(genre.name)}
-                    labelStyle={{ color: "#fff", fontSize: 16 }}
-                    fillColor={"#4F249D"}
-                    checkColor={"#4F249D"}
-                    value={selectedTargetValue == genre.name}
-                    onChange={() => setSelectedTargetValue(genre.name)}
+                    label={`${toCapitalize(currency.name)} - ${currency.title}`}
+                    labelStyle={{ color: "#fff", fontSize: 16, margin: "2%" }}
+                    styleView={styles.labelStyle}
+                    fillColor={colors.purpleCommon}
+                    checkColor={colors.purpleCommon}
+                    value={selectedTargetValue == currency.name}
+                    onChange={() => {
+                      setSelectedTargetValue(currency.name);
+                      setShowModalTargetValue(false);
+                    }}
                   />
                 </View>
               );
